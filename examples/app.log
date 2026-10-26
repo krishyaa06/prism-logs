@@ -1,0 +1,85 @@
+ts=2026-10-26T12:39:45.343Z level=info msg="payment captured" psp=razorpay amount=4479.57 currency=INR status=200 latency_ms=172 key=sk_live_9e3779b19e3779b1x trace_id=9e3779b1
+117.202.224.83 - - [26/Oct/2026:12:39:45 +0000] "GET /api/v1/checkout HTTP/1.1" 200 16197 "-" "okhttp/4.12.0" 0.056
+{"ts":"2026-10-26T12:39:45.843Z","level":"info","service":"auth","msg":"token issued","user":"riya.sharma@gmail.com","ip":"157.196.107.182","authorization":"Bearer daa66d13daa66d13daa66d13daa66d13daa66d13","latency_ms":11,"trace_id":"daa66d13"}
+152.174.200.149 - - [26/Oct/2026:12:39:46 +0000] "GET /api/v1/cart HTTP/1.1" 200 9060 "-" "okhttp/4.12.0" 0.089
+{"ts":"2026-10-26T12:39:46.343Z","level":"info","service":"auth","msg":"token issued","user":"neha@prismpay.in","ip":"152.218.169.95","authorization":"Bearer 1715607517156075171560751715607517156075","latency_ms":31,"trace_id":"17156075"}
+ts=2026-10-26T12:39:46.593Z level=info msg="payment captured" psp=payu amount=8672.53 currency=INR status=200 latency_ms=238 key=sk_live_b54cda26b54cda26x trace_id=b54cda26
+ts=2026-10-26T12:39:46.843Z level=info msg="payment captured" psp=stripe amount=4960.76 currency=INR status=200 latency_ms=139 key=sk_live_538453d7538453d7x trace_id=538453d7
+49.242.164.191 - - [26/Oct/2026:12:39:47 +0000] "GET /api/v1/orders/8812 HTTP/1.1" 200 10017 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X)" 0.064
+ts=2026-10-26T12:39:47.343Z level=warn msg="payment declined" psp=payu amount=5344.26 currency=INR status=402 latency_ms=630 key=sk_live_8ff347398ff34739x trace_id=8ff34739
+ts=2026-10-26T12:39:47.593Z level=info msg="job finished" job=sync-inventory duration_ms=786 queue=default attempt=1
+{"ts":"2026-10-26T12:39:47.843Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_33076","items":4,"amount":9255.94,"currency":"INR","latency_ms":80,"user":"riya.sharma@gmail.com","trace_id":"cc623a9b","card":"4242424242424242"}
+103.253.133.46 - kabir [26/Oct/2026:12:39:48 +0000] "GET /api/v1/cart HTTP/1.1" 200 15640 "-" "okhttp/4.12.0" 0.005
+{"ts":"2026-10-26T12:39:48.343Z","level":"info","service":"auth","msg":"token issued","user":"sara.m@proton.me","ip":"49.155.172.147","authorization":"Bearer 08d12dfd08d12dfd08d12dfd08d12dfd08d12dfd","latency_ms":34,"trace_id":"08d12dfd"}
+117.112.141.71 - - [26/Oct/2026:12:39:48 +0000] "POST /api/v1/login HTTP/1.1" 200 485 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0" 0.022
+{"ts":"2026-10-26T12:39:48.843Z","level":"info","service":"auth","msg":"mfa challenge","user":"neha@prismpay.in","ip":"49.27.47.33","authorization":"Bearer 4540215f4540215f4540215f4540215f4540215f","latency_ms":48,"trace_id":"4540215f"}
+{"ts":"2026-10-26T12:39:49.093Z","level":"info","service":"auth","msg":"token issued","user":"neha@prismpay.in","ip":"103.34.33.105","authorization":"Bearer e3779b10e3779b10e3779b10e3779b10e3779b10","latency_ms":13,"trace_id":"e3779b10"}
+157.74.83.72 - neha [26/Oct/2026:12:39:49 +0000] "POST /api/v1/products HTTP/1.1" 404 469 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X)" 0.101
+157.7.250.80 - arjun.k [26/Oct/2026:12:39:49 +0000] "GET /api/v1/search?q=shoes HTTP/1.1" 200 11564 "-" "okhttp/4.12.0" 0.041
+{"ts":"2026-10-26T12:39:49.843Z","level":"info","service":"auth","msg":"token issued","user":"dev.patel@yahoo.com","ip":"157.219.153.67","authorization":"Bearer be1e0823be1e0823be1e0823be1e0823be1e0823","latency_ms":25,"trace_id":"be1e0823"}
+ts=2026-10-26T12:39:50.093Z level=info msg="job finished" job=send-invoice duration_ms=644 queue=default attempt=1
+ts=2026-10-26T12:39:50.343Z level=info msg="payment captured" psp=payu amount=2182.81 currency=INR status=200 latency_ms=133 key=sk_live_fa8cfb85fa8cfb85x trace_id=fa8cfb85
+ts=2026-10-26T12:39:50.593Z level=info msg="job finished" job=email-digest duration_ms=437 queue=default attempt=1
+{"ts":"2026-10-26T12:39:50.843Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_30253","items":5,"amount":10165.51,"currency":"INR","latency_ms":49,"user":"sara.m@proton.me","trace_id":"36fbeee7"}
+ts=2026-10-26T12:39:51.093Z level=info msg="payment captured" psp=payu amount=642.30 currency=INR status=200 latency_ms=114 key=sk_live_d5336898d5336898x trace_id=d5336898
+103.219.60.119 - - [26/Oct/2026:12:39:51 +0000] "POST /api/v1/login HTTP/1.1" 200 20203 "-" "curl/8.5.0" 0.057
+152.106.18.60 - - [26/Oct/2026:12:39:51 +0000] "POST /api/v1/login HTTP/1.1" 201 13173 "-" "okhttp/4.12.0" 0.056
+ts=2026-10-26T12:39:51.843Z level=info msg="payment captured" psp=payu amount=8511.80 currency=INR status=200 latency_ms=337 key=sk_live_afd9d5abafd9d5abx trace_id=afd9d5ab
+ts=2026-10-26T12:39:52.093Z level=info msg="job finished" job=send-invoice duration_ms=458 queue=default attempt=1
+117.134.43.24 - - [26/Oct/2026:12:39:52 +0000] "GET /healthz HTTP/1.1" 200 7744 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0" 0.013
+{"ts":"2026-10-26T12:39:52.593Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_13409","items":3,"amount":2951.4,"currency":"INR","latency_ms":25,"user":"riya.sharma@gmail.com","trace_id":"8a8042be"}
+157.242.166.205 - - [26/Oct/2026:12:39:52 +0000] "POST /api/v1/products HTTP/1.1" 200 18581 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0" 0.028
+ts=2026-10-26T12:39:53.093Z level=info msg="job finished" job=sync-inventory duration_ms=259 queue=default attempt=1
+{"ts":"2026-10-26T12:39:53.343Z","level":"info","service":"auth","msg":"token issued","user":"dev.patel@yahoo.com","ip":"49.68.112.196","authorization":"Bearer 6526afd16526afd16526afd16526afd16526afd1","latency_ms":33,"trace_id":"6526afd1"}
+ts=2026-10-26T12:39:53.593Z level=info msg="job finished" job=email-digest duration_ms=177 queue=default attempt=1
+{"ts":"2026-10-26T12:39:53.843Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_85614","items":2,"amount":1968.34,"currency":"INR","latency_ms":77,"user":"dev.patel@yahoo.com","trace_id":"a195a333"}
+ts=2026-10-26T12:39:54.093Z level=info msg="payment captured" psp=payu amount=3477.58 currency=INR status=200 latency_ms=348 key=sk_live_3fcd1ce43fcd1ce4x trace_id=3fcd1ce4
+{"ts":"2026-10-26T12:39:54.343Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_71682","items":3,"amount":935.73,"currency":"INR","latency_ms":30,"user":"riya.sharma@gmail.com","trace_id":"de049695"}
+ts=2026-10-26T12:39:54.593Z level=info msg="payment captured" psp=razorpay amount=188.51 currency=INR status=200 latency_ms=89 key=sk_live_7c3c10467c3c1046x trace_id=7c3c1046
+152.136.47.135 - arjun.k [26/Oct/2026:12:39:54 +0000] "GET /api/v1/cart HTTP/1.1" 200 2095 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X)" 0.010
+{"ts":"2026-10-26T12:39:55.093Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_79940","items":2,"amount":1227.39,"currency":"INR","latency_ms":78,"user":"riya.sharma@gmail.com","trace_id":"b8ab03a8","card":"4242424242424242"}
+152.197.49.64 - - [26/Oct/2026:12:39:55 +0000] "GET /healthz HTTP/1.1" 200 20223 "-" "okhttp/4.12.0" 0.017
+{"ts":"2026-10-26T12:39:55.593Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_89330","items":2,"amount":3167.25,"currency":"INR","latency_ms":42,"user":"neha@prismpay.in","trace_id":"f519f70a","card":"4111 1111 1111 1111"}
+{"ts":"2026-10-26T12:39:55.843Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_29821","items":5,"amount":10279.22,"currency":"INR","latency_ms":53,"user":"sara.m@proton.me","trace_id":"935170bb"}
+117.126.253.102 - riya.sharma [26/Oct/2026:12:39:56 +0000] "GET /api/v1/search?q=shoes HTTP/1.1" 304 4629 "-" "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X)" 0.036
+{"ts":"2026-10-26T12:39:56.343Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_48760","items":4,"amount":7114.96,"currency":"INR","latency_ms":27,"user":"dev.patel@yahoo.com","trace_id":"cfc0641d"}
+{"ts":"2026-10-26T12:39:56.593Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_25451","items":1,"amount":1973.25,"currency":"INR","latency_ms":169,"user":"sara.m@proton.me","trace_id":"6df7ddce"}
+{"ts":"2026-10-26T12:39:56.843Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_20337","items":6,"amount":13403.48,"currency":"INR","latency_ms":68,"user":"neha@prismpay.in","trace_id":"0c2f577f"}
+103.90.40.39 - - [26/Oct/2026:12:39:57 +0000] "GET /healthz HTTP/1.1" 200 20238 "-" "curl/8.5.0" 0.036
+157.112.121.18 - - [26/Oct/2026:12:39:57 +0000] "GET /api/v1/products HTTP/1.1" 200 20627 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0" 0.036
+{"ts":"2026-10-26T12:39:57.593Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_60735","items":4,"amount":2439.33,"currency":"INR","latency_ms":28,"user":"kabir@zoho.in","trace_id":"e6d5c492"}
+{"ts":"2026-10-26T12:39:57.843Z","level":"warn","service":"auth","msg":"token issued","user":"arjun.k@outlook.com","ip":"157.32.217.26","authorization":"Bearer 850d3e43850d3e43850d3e43850d3e43850d3e43","latency_ms":22,"trace_id":"850d3e43"}
+152.81.88.106 - - [26/Oct/2026:12:39:58 +0000] "GET /api/v1/products HTTP/1.1" 200 22883 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0" 0.016
+ts=2026-10-26T12:39:58.343Z level=info msg="payment captured" psp=payu amount=2622.56 currency=INR status=200 latency_ms=327 key=sk_live_c17c31a5c17c31a5x trace_id=c17c31a5
+ts=2026-10-26T12:39:58.593Z level=info msg="job finished" job=rebuild-search duration_ms=1238 queue=default attempt=1
+ts=2026-10-26T12:39:58.843Z level=info msg="payment captured" psp=razorpay amount=6378.72 currency=INR status=200 latency_ms=146 key=sk_live_fdeb2507fdeb2507x trace_id=fdeb2507
+ts=2026-10-26T12:39:59.093Z level=info msg="payment captured" psp=stripe amount=384.50 currency=INR status=200 latency_ms=152 key=sk_live_9c229eb89c229eb8x trace_id=9c229eb8
+<28>Oct 26 12:39:59 node-1 systemd[1416]: Accepted publickey for deploy from 10.0.3.14 port 52211
+103.217.242.42 - - [26/Oct/2026:12:39:59 +0000] "POST /api/v1/cart HTTP/1.1" 200 18572 "-" "curl/8.5.0" 0.194
+{"ts":"2026-10-26T12:39:59.843Z","level":"info","service":"checkout","msg":"order placed","order_id":"ord_93501","items":4,"amount":7693.11,"currency":"INR","latency_ms":31,"user":"arjun.k@outlook.com","trace_id":"76c90bcb"}
+ts=2026-10-26T12:40:00.093Z level=info msg="payment captured" psp=payu amount=5452.42 currency=INR status=200 latency_ms=90 key=sk_live_1500857c1500857cx trace_id=1500857c
+103.234.34.161 - - [26/Oct/2026:12:39:45 +0000] "GET /healthz HTTP/1.1" 200 6945 "-" "curl/8.5.0" 0.053
+157.116.222.49 - - [26/Oct/2026:12:39:45 +0000] "GET /api/v1/products HTTP/1.1" 200 1344 "-" "curl/8.5.0" 0.102
+49.18.125.79 - - [26/Oct/2026:12:39:45 +0000] "GET /api/v1/cart HTTP/1.1" 504 13370 "-" "curl/8.5.0" 3.815
+{"ts":"2026-10-26T12:39:46.188Z","level":"error","service":"checkout","msg":"timeout acquiring connection from pool","db":{"host":"pg-primary-1","pool":"orders","wait_ms":7147},"trace_id":"78dde6c4","user":"dev.patel@yahoo.com"}
+{"ts":"2026-10-26T12:39:46.438Z","level":"info","service":"auth","msg":"token issued","user":"dev.patel@yahoo.com","ip":"117.46.237.152","authorization":"Bearer 1715607517156075171560751715607517156075","latency_ms":28,"trace_id":"17156075"}
+{"ts":"2026-10-26T12:39:46.688Z","level":"warn","service":"checkout","msg":"slow checkout","order_id":"ord_18553","items":5,"amount":8985.23,"currency":"INR","latency_ms":964,"user":"kabir@zoho.in","trace_id":"b54cda26"}
+ts=2026-10-26T12:39:46.938Z level=info msg="job finished" job=email-digest duration_ms=211 queue=default attempt=1
+ts=2026-10-26T12:39:47.188Z level=info msg="job finished" job=rebuild-search duration_ms=1261 queue=default attempt=1
+ts=2026-10-26T12:39:47.438Z level=error msg="ledger write failed: could not connect to server: Connection timed out" psp=payu retry=2 trace_id=8ff34739
+{"ts":"2026-10-26T12:39:47.688Z","level":"error","service":"checkout","msg":"timeout acquiring connection from pool","db":{"host":"pg-primary-1","pool":"orders","wait_ms":6952},"trace_id":"2e2ac0ea","user":"dev.patel@yahoo.com"}
+49.55.152.175 - sara.m [26/Oct/2026:12:39:47 +0000] "GET /api/v1/search?q=shoes HTTP/1.1" 404 21484 "-" "okhttp/4.12.0" 0.083
+49.74.210.38 - - [26/Oct/2026:12:39:48 +0000] "GET /api/v1/checkout HTTP/1.1" 200 20014 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0" 1.706
+ts=2026-10-26T12:39:48.438Z level=info msg="job finished" job=email-digest duration_ms=527 queue=default attempt=1
+ts=2026-10-26T12:39:48.688Z level=info msg="job finished" job=sync-inventory duration_ms=339 queue=default attempt=1
+{"ts":"2026-10-26T12:39:48.938Z","level":"warn","service":"checkout","msg":"slow checkout","order_id":"ord_16323","items":5,"amount":1067.64,"currency":"INR","latency_ms":2557,"user":"sara.m@proton.me","trace_id":"4540215f"}
+{"ts":"2026-10-26T12:39:49.188Z","level":"info","service":"auth","msg":"token issued","user":"sara.m@proton.me","ip":"157.91.119.207","authorization":"Bearer e3779b10e3779b10e3779b10e3779b10e3779b10","latency_ms":12,"trace_id":"e3779b10"}
+{"ts":"2026-10-26T12:39:49.438Z","level":"warn","service":"checkout","msg":"slow checkout","order_id":"ord_20351","items":4,"amount":7721.28,"currency":"INR","latency_ms":1016,"user":"dev.patel@yahoo.com","trace_id":"81af14c1"}
+ts=2026-10-26T12:39:49.688Z level=info msg="payment captured" psp=razorpay amount=1074.47 currency=INR status=200 latency_ms=393 key=sk_live_1fe68e721fe68e72x trace_id=1fe68e72
+{"ts":"2026-10-26T12:39:49.938Z","level":"error","service":"checkout","msg":"timeout acquiring connection from pool","db":{"host":"pg-primary-1","pool":"orders","wait_ms":5674},"trace_id":"be1e0823","user":"riya.sharma@gmail.com"}
+{"ts":"2026-10-26T12:39:50.188Z","level":"error","service":"checkout","msg":"timeout acquiring connection from pool","db":{"host":"pg-primary-1","pool":"orders","wait_ms":6868},"trace_id":"5c5581d4","user":"neha@prismpay.in"}
+49.22.52.161 - - [26/Oct/2026:12:39:50 +0000] "GET /api/v1/search?q=shoes HTTP/1.1" 304 9903 "-" "okhttp/4.12.0" 0.042
+{"ts":"2026-10-26T12:39:50.688Z","level":"warn","service":"auth","msg":"token issued","user":"arjun.k@outlook.com","ip":"103.193.13.152","authorization":"Bearer 98c4753698c4753698c4753698c4753698c47536","latency_ms":12,"trace_id":"98c47536"}
+ts=2026-10-26T12:39:50.938Z level=info msg="payment captured" psp=stripe amount=2908.21 currency=INR status=200 latency_ms=289 key=sk_live_36fbeee736fbeee7x trace_id=36fbeee7
+152.32.226.189 - - [26/Oct/2026:12:39:51 +0000] "POST /api/v1/login HTTP/1.1" 200 1406 "-" "curl/8.5.0" 0.008
+ts=2026-10-26T12:39:51.438Z level=error msg="ledger write failed: could not connect to server: Connection timed out" psp=razorpay retry=2 trace_id=736ae249
