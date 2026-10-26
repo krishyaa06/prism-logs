@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prism Logs · Log aggregation with redaction, bloom-pruned chunks and LogQL · Prism Systems</title>
+  <meta name="description" content="Prism Logs is a log aggregation and query engine: format auto-detection (JSON, logfmt, nginx/apache combined, syslog), level and timestamp normalisation, ingest-time redaction of emails, cards (Luhn-checked), tokens, JWTs, passwords and IPs, a label-indexed chunk store with per-chunk trigram bloom filters, retention and cardinality guards, and a LogQL-compatible query engine with line filters, json/logfmt/pattern/regexp parsers, label filters, line_format, range functions, vector aggregations, topk and binary operators." />
+  <meta name="theme-color" content="#06070d" />
+  <meta property="og:title" content="Prism Logs · Prism Systems" />
+  <meta property="og:description" content="Prism Logs is a log aggregation and query engine: format auto-detection (JSON, logfmt, nginx/apache combined, syslog), level and timestamp normalisation, ingest-time redaction of emails, cards (Luhn-checked), tokens, JWTs, passwords and IPs, a label-indexed chunk store with per-chunk trigram bloom filters, retention and cardinality guards, and a LogQL-compatible query engine with line filters, json/logfmt/pattern/regexp parsers, label filters, line_format, range functions, vector aggregations, topk and binary operators." />
+  <meta property="og:image" content="https://krishyaa06.github.io/prism-logs/assets/screenshots/desktop.png" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/pro.css" />
+  <link rel="stylesheet" href="css/app.css" />
+  <style>:root{--accent:#00D2FF;--accent-2:#7C5CFF}</style>
+</head>
+<body>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <header class="topbar"><div class="wrap">
+    <a class="brand" href="./"><span class="mark">◆</span><b>PRISM</b><span>Logs</span></a>
+    <nav>
+      <a class="nl" href="#sim">Simulator</a><a class="nl" href="#features">Features</a><a class="nl" href="#how">How it works</a><a class="nl" href="#arch">Architecture</a><a class="nl" href="#use">Use it</a>
+      <a class="btn sm" href="https://github.com/krishyaa06/prism-logs" target="_blank" rel="noreferrer">★ GitHub</a>
+    </nav>
+  </div></header>
+  <main>
+    <section class="hero wrap">
+      <p class="eyebrow"><span class="n">05 / 49</span>Prism Systems · Cloud-Native &amp; Developer Infrastructure</p>
+      <h1>Logs you can <em>search in milliseconds</em>, PII already masked</h1>
+      <p class="lead">A Loki-style log aggregation engine: auto-detecting parsers for JSON, logfmt, nginx and syslog, ingest-time PII and secret redaction, label-indexed chunks with trigram bloom filters, and a LogQL query engine with metric aggregations.</p>
+      <div class="cta"><a class="btn primary" href="#sim">▶ Launch the simulator</a><a class="btn" href="#use">Use the engine</a><a class="btn ghost" href="https://github.com/krishyaa06/prism-logs" target="_blank" rel="noreferrer">View source →</a></div>
+      <div class="chips"><span class="chip"><i></i>Zero dependencies</span><span class="chip"><i></i>~40k lines/s ingest</span><span class="chip"><i></i>LogQL subset</span><span class="chip"><i></i>9 redaction rules</span><span class="chip"><i></i>Bloom pruning</span></div>
+    </section>
+    <section class="section wrap" id="sim">
+      <div class="sec-head"><span class="kicker">Live simulator</span><h2>Ingest six services, query them live</h2><p>Six services write four log formats into the pipeline. Trigger a DB outage or credential stuffing, toggle redaction, then run LogQL. Chunks the query reads glow, chunks the bloom filter rules out flash red.</p></div>
+<div class="sim">
+  <div class="main">
+    <div class="panel glow">
+      <div class="toolbar">
+        <button class="btn primary sm" data-play>▶ Run</button>
+        <select data-speed aria-label="Speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="3">3×</option></select>
+        <span class="sep"></span>
+        <button class="btn sm bad" id="inc-db">DB outage</button>
+        <button class="btn sm bad" id="inc-auth">Credential stuffing</button>
+        <button class="btn sm on" id="red">Redaction</button>
+        <label class="f inl">Ingest <input type="range" id="rate" min="20" max="400" value="90" /><output id="ro">90/s</output></label>
+        <span class="sp"></span>
+        <span class="live"><i></i> paused</span>
+      </div>
+      <div id="kpis" style="margin-top:12px"></div>
+    </div>
+    <div class="viz" id="pipew" style="height:430px"><span class="tag">Ingest pipeline → label-indexed chunks</span><canvas id="pipe"></canvas></div>
+    <div class="g2 grid">
+      <div class="panel"><div class="ph">Lines / s by level</div><canvas class="chart" id="ch1" style="height:150px"></canvas></div>
+      <div class="panel"><div class="ph">Query result<span class="sp"></span><span class="pill dim" id="qkind">—</span></div><canvas class="chart" id="qch" style="height:150px"></canvas></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="panel"><div class="ph">LogQL<span class="sp"></span><button class="btn primary sm" id="run">Run query</button></div>
+      <select id="preset" aria-label="Example queries" style="width:100%;margin-bottom:8px"></select>
+      <textarea id="q" spellcheck="false" rows="4" style="width:100%;font:12px/1.5 var(--mono)"></textarea>
+      <div id="qstat" class="dim" style="font:11px/1.6 var(--mono);margin-top:8px;color:var(--muted)"></div>
+      <div id="qout" class="log" style="height:230px;margin-top:8px;font-size:11px"></div>
+    </div>
+    <div class="panel"><div class="ph">Live tail · after redaction<span class="sp"></span><span class="pill acc" id="redn">0 masked</span></div><div id="tail" class="log" style="height:250px;font-size:11px"></div></div>
+  </div>
+</div>
+
+    </section>
+    <section class="section wrap" id="features">
+      <div class="sec-head reveal"><span class="kicker">Features</span><h2>What's inside the engine</h2><p>Real algorithms, not mock-ups. The simulator above runs the exact same code you import.</p></div>
+      <div class="feat"><div class="card reveal"><div class="ic">⇄</div><h3>Format auto-detection</h3><p>JSON (nested fields flattened to <code class="mono">http_status</code>), logfmt, nginx/apache combined with <code class="mono">request_time</code>, RFC 3164 syslog and plain text.</p></div><div class="card reveal"><div class="ic">⚖</div><h3>Normalisation</h3><p>Levels from <code class="mono">level</code>, <code class="mono">severity</code>, pino numbers, syslog PRI or HTTP status. Timestamps from ISO, epoch s/ms/ns or nginx dates.</p></div><div class="card reveal"><div class="ic">✱</div><h3>Ingest-time redaction</h3><p>Emails, Luhn-valid cards, Aadhaar, phones, bearer tokens, JWTs, <code class="mono">sk_live_</code> / AWS / GitHub keys, passwords and IPv4 are masked before storage.</p></div><div class="card reveal"><div class="ic">▤</div><h3>Label-indexed chunks</h3><p>Only low-cardinality labels are indexed. Each stream is a list of chunks with min/max time, sealed by size or age.</p></div><div class="card reveal"><div class="ic">◌</div><h3>Trigram bloom filters</h3><p>Every chunk carries a 32 Kbit bloom of its trigrams, so <code class="mono">|= &quot;timeout&quot;</code> skips chunks that cannot match. No false negatives.</p></div><div class="card reveal"><div class="ic">λ</div><h3>LogQL engine</h3><p>Selectors, line filters, <code class="mono">json</code>/<code class="mono">logfmt</code>/<code class="mono">pattern</code>/<code class="mono">regexp</code>, label filters with and/or, <code class="mono">line_format</code>, <code class="mono">unwrap</code>, <code class="mono">drop</code>/<code class="mono">keep</code>.</p></div><div class="card reveal"><div class="ic">∑</div><h3>Metric queries</h3><p><code class="mono">rate</code>, <code class="mono">count_over_time</code>, <code class="mono">bytes_rate</code>, <code class="mono">quantile_over_time</code>, <code class="mono">avg/min/max/sum_over_time</code>, <code class="mono">sum/avg/count by</code>, <code class="mono">topk</code>, <code class="mono">+ - * /</code>.</p></div><div class="card reveal"><div class="ic">⛨</div><h3>Guard rails</h3><p>Retention compaction, a stream cardinality limit, out-of-order tolerance inside open chunks, and helpful parse errors.</p></div></div>
+    </section>
+    <section class="section wrap" id="how">
+      <div class="sec-head reveal"><span class="kicker">How it works</span><h2>From request to result</h2></div>
+      <div class="steps"><div class="step reveal"><h3>Parse</h3><p>Each line&#x27;s format is detected, fields are extracted and flattened, and level and timestamp are normalised.</p></div><div class="step reveal"><h3>Redact</h3><p>Nine rules mask PII and secrets in the raw line. Counts per rule are tracked for compliance reporting.</p></div><div class="step reveal"><h3>Label</h3><p>Static labels (service, env) plus the normalised level form the stream key. High-cardinality fields stay in the line.</p></div><div class="step reveal"><h3>Chunk</h3><p>Lines append to the stream&#x27;s open chunk, which updates min/max time and the trigram bloom, then seals at 512 lines or 10 minutes.</p></div><div class="step reveal"><h3>Query</h3><p>The planner resolves streams through the label index, prunes chunks by time and bloom, then streams lines through the compiled pipeline and range/vector aggregations.</p></div></div>
+    </section>
+    <section class="section wrap" id="arch">
+      <div class="sec-head reveal"><span class="kicker">Architecture</span><h2>System design</h2><p>Every box is a module in src/. Data flows left to right.</p></div>
+      <div class="card arch reveal"><svg viewBox="0 0 1160 310" role="img" aria-label="Architecture diagram"><path class="e" d="M272,153 C290,153 290,73 308,73"/><path class="f" d="M272,153 C290,153 290,73 308,73"/><path class="e" d="M548,102 C578,102 578,124 548,124"/><path class="f" d="M548,102 C578,102 578,124 548,124"/><path class="e" d="M548,182 C578,182 578,204 548,204"/><path class="f" d="M548,182 C578,182 578,204 548,204"/><path class="e" d="M562,233 C580,233 580,73 598,73"/><path class="f" d="M562,233 C580,233 580,73 598,73"/><text class="el" x="580" y="147" text-anchor="middle">labels</text><path class="e" d="M562,233 C580,233 580,153 598,153"/><path class="f" d="M562,233 C580,233 580,153 598,153"/><text class="el" x="580" y="187" text-anchor="middle">line</text><path class="e" d="M838,182 C868,182 868,204 838,204"/><path class="f" d="M838,182 C868,182 868,204 838,204"/><path class="e" d="M852,73 C870,73 870,113 888,113"/><path class="f" d="M852,73 C870,73 870,113 888,113"/><path class="e" d="M852,153 C870,153 870,113 888,113"/><path class="f" d="M852,153 C870,153 870,113 888,113"/><text class="el" x="870" y="127" text-anchor="middle">prune</text><path class="e" d="M1128,142 C1158,142 1158,164 1128,164"/><path class="f" d="M1128,142 C1158,142 1158,164 1128,164"/><text class="lane" x="145" y="24" text-anchor="middle">SOURCES</text><g class="node k0"><rect x="18" y="124" width="254" height="58" rx="12"/><text x="145" y="149" text-anchor="middle">Services</text><text class="s" x="145" y="163" text-anchor="middle">json · logfmt · nginx · syslog</text></g><text class="lane" x="435" y="24" text-anchor="middle">INGEST</text><g class="node kk2"><rect x="308" y="44" width="254" height="58" rx="12"/><text x="435" y="69" text-anchor="middle">Parser</text><text class="s" x="435" y="83" text-anchor="middle">detect · flatten</text></g><g class="node kk2"><rect x="308" y="124" width="254" height="58" rx="12"/><text x="435" y="149" text-anchor="middle">Normaliser</text><text class="s" x="435" y="163" text-anchor="middle">level · timestamp</text></g><g class="node kk2"><rect x="308" y="204" width="254" height="58" rx="12"/><text x="435" y="229" text-anchor="middle">Redactor</text><text class="s" x="435" y="243" text-anchor="middle">9 PII rules</text></g><text class="lane" x="725" y="24" text-anchor="middle">STORAGE</text><g class="node kk3"><rect x="598" y="44" width="254" height="58" rx="12"/><text x="725" y="69" text-anchor="middle">Label index</text><text class="s" x="725" y="83" text-anchor="middle">label=value → streams</text></g><g class="node kk3"><rect x="598" y="124" width="254" height="58" rx="12"/><text x="725" y="149" text-anchor="middle">Chunks</text><text class="s" x="725" y="163" text-anchor="middle">min/max · bloom</text></g><g class="node kk3"><rect x="598" y="204" width="254" height="58" rx="12"/><text x="725" y="229" text-anchor="middle">Compactor</text><text class="s" x="725" y="243" text-anchor="middle">retention</text></g><text class="lane" x="1015" y="24" text-anchor="middle">QUERY</text><g class="node k0"><rect x="888" y="84" width="254" height="58" rx="12"/><text x="1015" y="109" text-anchor="middle">Planner</text><text class="s" x="1015" y="123" text-anchor="middle">index · time · bloom</text></g><g class="node k0"><rect x="888" y="164" width="254" height="58" rx="12"/><text x="1015" y="189" text-anchor="middle">Executor</text><text class="s" x="1015" y="203" text-anchor="middle">pipeline · range · agg</text></g></svg></div>
+    </section>
+    <section class="section wrap" id="use">
+      <div class="sec-head reveal"><span class="kicker">Use it</span><h2>Ship it in your own stack</h2><p>Zero dependencies. Works in Node.js 18+ and modern browsers.</p></div>
+      <div class="tabs" data-tabs="use"><button class="on">JavaScript API</button><button>CLI</button><button>Install</button></div>
+      <div class="tabp on" data-tabp="use"><div class="codebox"><div class="bar2"><i></i><i></i><i></i><span>example.js</span><button class="btn sm ghost copy" data-copy>Copy</button></div><pre><code><span class="tk-k">import</span> { LogStore, Ingestor, query, explain } <span class="tk-k">from</span> <span class="tk-s">&quot;prism-logs&quot;</span>;
+
+<span class="tk-k">const</span> store = <span class="tk-k">new</span> <span class="tk-f">LogStore</span>({ chunkLines: <span class="tk-n">512</span>, retentionMs: <span class="tk-n">7</span> * <span class="tk-n">864e5</span> });
+<span class="tk-k">const</span> ingest = <span class="tk-k">new</span> <span class="tk-f">Ingestor</span>(store, { labels: [<span class="tk-s">&quot;service&quot;</span>, <span class="tk-s">&quot;env&quot;</span>] });   <span class="tk-c">// redaction on by default</span>
+
+ingest.<span class="tk-f">push</span>(<span class="tk-s">&#x27;{&quot;level&quot;:&quot;error&quot;,&quot;msg&quot;:&quot;timeout acquiring connection&quot;,&quot;db&quot;:{&quot;wait_ms&quot;:7200},&quot;user&quot;:&quot;riya@gmail.com&quot;}&#x27;</span>, { service: <span class="tk-s">&quot;checkout&quot;</span>, env: <span class="tk-s">&quot;prod&quot;</span> });
+ingest.<span class="tk-f">push</span>(<span class="tk-s">&#x27;ts=2026-10-26T10:00:00Z level=info msg=&quot;payment captured&quot; psp=razorpay latency_ms=142&#x27;</span>, { service: <span class="tk-s">&quot;payments&quot;</span>, env: <span class="tk-s">&quot;prod&quot;</span> });
+
+<span class="tk-k">const</span> logs = <span class="tk-f">query</span>(store, <span class="tk-s">&#x27;{service=&quot;checkout&quot;} |= &quot;timeout&quot; | json | db_wait_ms &gt; 6000&#x27;</span>, { limit: <span class="tk-n">50</span> });
+console.<span class="tk-f">log</span>(logs.entries[<span class="tk-n">0</span>].line);           <span class="tk-c">// ...&quot;user&quot;:&quot;r***@gmail.com&quot;...</span>
+console.<span class="tk-f">log</span>(logs.stats);                     <span class="tk-c">// { chunksScanned, chunksBloom, lines, bytes, ms, ... }</span>
+
+<span class="tk-k">const</span> errs = <span class="tk-f">query</span>(store, <span class="tk-s">&#x27;sum by (service) (rate({level=&quot;error&quot;}[1m]))&#x27;</span>, { start, end, step: <span class="tk-n">15e3</span> });
+console.<span class="tk-f">log</span>(errs.series);                    <span class="tk-c">// [{ labels: { service }, values: [...] }]</span>
+console.<span class="tk-f">log</span>(<span class="tk-f">explain</span>(errs.ast));</code></pre></div></div>
+      <div class="tabp" data-tabp="use"><div class="codebox"><div class="bar2"><i></i><i></i><i></i><span>terminal</span><button class="btn sm ghost copy" data-copy>Copy</button></div><pre><code><span class="tk-pr">$ </span>npx github:krishyaa06/prism-logs query &#x27;{service=<span class="tk-s">&quot;checkout&quot;</span>} |= <span class="tk-s">&quot;timeout&quot;</span> | json | db_wait_ms &gt; 6000&#x27;
+<span class="tk-pr">$ </span>npx github:krishyaa06/prism-logs query &#x27;sum by (service) (count_over_time({level=~<span class="tk-s">&quot;error|fatal&quot;</span>}[1m]))&#x27;
+<span class="tk-pr">$ </span>npx github:krishyaa06/prism-logs query &#x27;{service=<span class="tk-s">&quot;app&quot;</span>} | logfmt | latency_ms &gt; 300&#x27; <span class="tk-p">--file</span> app.log <span class="tk-p">--service</span> app
+<span class="tk-pr">$ </span>cat app.log | npx github:krishyaa06/prism-logs redact -
+<span class="tk-pr">$ </span>npx github:krishyaa06/prism-logs bench <span class="tk-p">--n</span> 100000</code></pre></div></div>
+      <div class="tabp" data-tabp="use"><div class="codebox"><div class="bar2"><i></i><i></i><i></i><span>terminal</span><button class="btn sm ghost copy" data-copy>Copy</button></div><pre><code><span class="tk-c"># use the CLI without installing</span>
+<span class="tk-pr">$ </span>npx github:krishyaa06/prism-logs <span class="tk-p">--help</span>
+
+<span class="tk-c"># or add the engine to your project</span>
+<span class="tk-pr">$ </span>npm install github:krishyaa06/prism-logs
+
+<span class="tk-c"># run the simulator locally</span>
+<span class="tk-pr">$ </span>git clone https://github.com/krishyaa06/prism-logs.git &amp;&amp; cd prism-logs
+<span class="tk-pr">$ </span>npx serve .   # then open http://localhost:3000</code></pre></div></div>
+    </section>
+  </main>
+  <footer class="foot"><div class="wrap">
+    <span>◆ Prism Logs · Prism Systems 05/49 · Built by <a href="https://github.com/krishyaa06">Soumya Bhandare</a> &amp; <a href="https://dc.gg/prismprotocol" target="_blank" rel="noreferrer">Prism Protocol</a></span>
+    <span><a href="https://github.com/krishyaa06/prism-logs" target="_blank" rel="noreferrer">Source</a> · <a href="https://github.com/krishyaa06/prism-logs/blob/main/docs/ARCHITECTURE.md">Architecture</a> · <a href="https://github.com/krishyaa06/prism-logs/blob/main/docs/USAGE.md">Docs</a> · MIT License</span>
+  </div></footer>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

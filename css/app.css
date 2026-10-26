@@ -1,0 +1,9 @@
+#kpis{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media(max-width:1200px){#kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:480px){#kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){#pipew{height:600px!important}}
+#qout .ln,#tail .ln{white-space:pre-wrap;word-break:break-all}
+.lv{display:inline-block;min-width:38px;font-weight:600}.lv.error,.lv.fatal{color:var(--bad)}.lv.warn{color:var(--warn)}.lv.info{color:var(--info)}.lv.debug{color:var(--faint)}
+.mask{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border-radius:3px;padding:0 2px}
+.svc{color:var(--accent-2)}
+#qout .ser{display:flex;gap:8px;align-items:center}#qout .ser i{width:10px;height:3px;border-radius:2px;flex:none}

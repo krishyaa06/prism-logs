@@ -1,0 +1,32 @@
+<div class="sim">
+  <div class="main">
+    <div class="panel glow">
+      <div class="toolbar">
+        <button class="btn primary sm" data-play>▶ Run</button>
+        <select data-speed aria-label="Speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="3">3×</option></select>
+        <span class="sep"></span>
+        <button class="btn sm bad" id="inc-db">DB outage</button>
+        <button class="btn sm bad" id="inc-auth">Credential stuffing</button>
+        <button class="btn sm on" id="red">Redaction</button>
+        <label class="f inl">Ingest <input type="range" id="rate" min="20" max="400" value="90" /><output id="ro">90/s</output></label>
+        <span class="sp"></span>
+        <span class="live"><i></i> paused</span>
+      </div>
+      <div id="kpis" style="margin-top:12px"></div>
+    </div>
+    <div class="viz" id="pipew" style="height:430px"><span class="tag">Ingest pipeline → label-indexed chunks</span><canvas id="pipe"></canvas></div>
+    <div class="g2 grid">
+      <div class="panel"><div class="ph">Lines / s by level</div><canvas class="chart" id="ch1" style="height:150px"></canvas></div>
+      <div class="panel"><div class="ph">Query result<span class="sp"></span><span class="pill dim" id="qkind">—</span></div><canvas class="chart" id="qch" style="height:150px"></canvas></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="panel"><div class="ph">LogQL<span class="sp"></span><button class="btn primary sm" id="run">Run query</button></div>
+      <select id="preset" aria-label="Example queries" style="width:100%;margin-bottom:8px"></select>
+      <textarea id="q" spellcheck="false" rows="4" style="width:100%;font:12px/1.5 var(--mono)"></textarea>
+      <div id="qstat" class="dim" style="font:11px/1.6 var(--mono);margin-top:8px;color:var(--muted)"></div>
+      <div id="qout" class="log" style="height:230px;margin-top:8px;font-size:11px"></div>
+    </div>
+    <div class="panel"><div class="ph">Live tail · after redaction<span class="sp"></span><span class="pill acc" id="redn">0 masked</span></div><div id="tail" class="log" style="height:250px;font-size:11px"></div></div>
+  </div>
+</div>

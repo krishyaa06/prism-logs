@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
+      - name: Smoke test
+        run: |
+          node bin/logs.js query '{service="checkout"} |= "timeout" | json' --limit 3 && node bin/logs.js query 'sum by (service) (rate({level="error"}[1m]))' && node bin/logs.js redact examples/app.log > /dev/null && node bin/logs.js bench --n 20000

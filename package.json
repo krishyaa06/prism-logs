@@ -1,0 +1,43 @@
+{
+  "name": "prism-logs",
+  "version": "1.0.0",
+  "description": "Prism Logs is a log aggregation and query engine: format auto-detection (JSON, logfmt, nginx/apache combined, syslog), level and timestamp normalisation, ingest-time redaction of emails, cards (Luhn-checked), tokens, JWTs, passwords and IPs, a label-indexed chunk store with per-chunk trigram bloom filters, retention and cardinality guards, and a LogQL-compatible query engine with line filters, json/logfmt/pattern/regexp parsers, label filters, line_format, range functions, vector aggregations, topk and binary operators.",
+  "type": "module",
+  "bin": {
+    "logs": "bin/logs.js"
+  },
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "npx --yes serve ."
+  },
+  "keywords": [
+    "logging",
+    "log-aggregation",
+    "logql",
+    "loki",
+    "observability",
+    "bloom-filter",
+    "pii-redaction",
+    "query-engine",
+    "devops",
+    "javascript"
+  ],
+  "author": "Soumya Bhandare (krishyaa06)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krishyaa06/prism-logs.git"
+  },
+  "homepage": "https://krishyaa06.github.io/prism-logs/",
+  "engines": {
+    "node": ">=18.17"
+  }
+}
